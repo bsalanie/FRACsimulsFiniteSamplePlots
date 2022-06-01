@@ -9,8 +9,8 @@ monte_carlo_dir = mkdir_if_needed(
     frank_blp_root / "Q2-2022" / "Estimates_and_Tests_May_29"
 )
 estimates_dir = monte_carlo_dir / "estimates"
-data_dir = mkdir_if_needed("../Latest_Data")
-plots_dir = mkdir_if_needed("../Latest_Plots")
+data_dir = mkdir_if_needed("./Latest_Data")
+plots_dir = mkdir_if_needed("./Latest_Plots")
 
 var_omega_vals = (0.2,)
 var_omega_strs = tuple(map(str, var_omega_vals))

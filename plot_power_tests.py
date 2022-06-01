@@ -6,7 +6,8 @@ import sys
 
 from bsutils import mkdir_if_needed
 
-from params_monte_carlo import *
+from params_monte_carlo import data_dir, plots_dir, str_demand_betas, str_demand_sigmas
+
 
 sns.set_context("paper")
 sns.set_style("whitegrid")
@@ -25,7 +26,7 @@ def plot_power(which_test: str, str_coeff: str):
     dd.rename(columns={"Value": "Power"}, inplace=True)
     dd["true_coeff_case"] = dd[true_coeff].map(str)
 
-    print(dd)
+    # print(dd)
 
     g = sns.FacetGrid(
         dd,
@@ -58,7 +59,7 @@ def plot_joint_(df, coeff_colname):
     ].agg(lambda x: np.mean(x < 0.05))
     dd.rename(columns={"Value": "Power"}, inplace=True)
     dd["true_coeff_case"] = dd[coeff_colname].map(str)
-    print(f"{dd=}")
+    # print(f"{dd=}")
     g = sns.FacetGrid(
         dd,
         col="Method",
@@ -97,16 +98,16 @@ def plot_joint_(df, coeff_colname):
 def plot_power_joint_1():
     df = pd.read_pickle(f"{data_dir}/df_test_joint_1_results.pkl")
     df_sel = df[df.Parameter == "p_value"]
-    print(df_sel)
+    # print(df_sel)
 
     df_sel = df_sel[["true_beta_1", "true_var_1", "Value", "Method"]]
 
     df_sel_null = df_sel.query("true_beta_1 == 0.0 & true_var_1 == 0.0").copy()
-    print(f"{df_sel_null=}")
+    # print(f"{df_sel_null=}")
     df_sel_pos_beta_1 = df_sel.query("true_beta_1 > 0.0 & true_var_1 == 0.0").copy()
     df_sel_pos_var_1 = df_sel.query("true_beta_1 == 0.0 & true_var_1 > 0.0").copy()
-    print(f"{df_sel_pos_beta_1=}")
-    print(f"{df_sel_pos_var_1=}")
+    # print(f"{df_sel_pos_beta_1=}")
+    # print(f"{df_sel_pos_var_1=}")
 
     df_beta_1 = pd.concat([df_sel_null, df_sel_pos_beta_1])
     plot_joint_(df_beta_1, "true_beta_1")
@@ -175,9 +176,9 @@ def plot_power_joint_1():
 
 if __name__ == "__main__":
 
-    # plot_power("beta_1", str_demand_betas[1])
-    # plot_power("var_1", str_demand_sigmas[0])
-    # plot_power("var_p", str_demand_sigmas[3])
+    plot_power("beta_1", str_demand_betas[1])
+    plot_power("var_1", str_demand_sigmas[0])
+    plot_power("var_p", str_demand_sigmas[3])
     plot_power_joint_1()
 
     # plot_power_over_ident()

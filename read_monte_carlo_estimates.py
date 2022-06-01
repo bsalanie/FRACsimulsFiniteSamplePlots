@@ -1,7 +1,18 @@
 import numpy as np
 import pandas as pd
 
-from params_monte_carlo import *
+from params_monte_carlo import (
+    estimates_dir,
+    methods,
+    methods_dic,
+    method_files,
+    headers_demand,
+    data_dir,
+    var_xi_vals,
+    sigma2_vals,
+    gamma_vals,
+    var_omega_vals,
+)
 
 
 def read_results_method(params, method):
@@ -12,7 +23,7 @@ def read_results_method(params, method):
     df = pd.read_csv(pm_dir / (file + ".csv"))
     if df.columns[0] == "V1":  # no headers in combinedMPECest.csv
         df.columns = headers_demand
-    print(df.head())
+    # print(df.head())
     df_full = pd.DataFrame()
     df_full["Simul"] = np.arange(len(df))
     df_full["Method"] = str_method

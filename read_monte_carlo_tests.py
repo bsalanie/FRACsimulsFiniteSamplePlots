@@ -1,16 +1,29 @@
 import numpy as np
 import pandas as pd
 
-from params_monte_carlo import *
+from params_monte_carlo import (
+    estimates_dir,
+    methods_dic,
+    test_methods,
+    data_dir,
+    testo_dic,
+    testp_dic,
+    test1_dic,
+    test_beta_1_configs,
+    test_var_1_configs,
+    test_var_p_configs,
+    test_joint_1_configs,
+    test_over_ident_configs,
+)
 
 
 def read_resus_(params, method, test_dic):
     true_beta_1, true_var_1, true_var_p = params
     pm_dir = estimates_dir / f"est_b1{true_beta_1}_s1{true_var_1}_sp{true_var_p}"
     file_tests = test_dic[method]
-    print(f"Reading {pm_dir / (file_tests + '.csv')}")
+    # print(f"Reading {pm_dir / (file_tests + '.csv')}")
     df_tests = pd.read_csv(pm_dir / (file_tests + ".csv"))
-    print(f"{df_tests.columns=}")
+    # print(f"{df_tests.columns=}")
     return df_tests
 
 

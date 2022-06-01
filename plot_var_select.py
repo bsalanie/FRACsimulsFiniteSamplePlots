@@ -2,10 +2,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 import numpy as np
+import sys
 
 from bsutils import mkdir_if_needed
 
-from params_monte_carlo import *
+from params_monte_carlo import data_dir, plots_dir, str_demand_betas, str_demand_sigmas
+
 
 sns.set_context("paper")
 sns.set_style("whitegrid")
@@ -24,7 +26,7 @@ def plot_diag(*args, **kwargs):
 def plot_pvalues(which_test: str, str_coeff: str, only_2siv: bool = False):
     df = pd.read_pickle(f"{data_dir}/df_test_{which_test}_results.pkl")
     df_sel = df[df.Parameter == "p_value"]
-    print(df_sel)
+    # print(df_sel)
     true_coeff = f"true_{which_test}"
     if only_2siv:
         str_2siv = "only_2siv"

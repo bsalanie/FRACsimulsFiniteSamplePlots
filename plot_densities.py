@@ -4,7 +4,23 @@ import seaborn as sns
 import pandas as pd
 from bsutils import mkdir_if_needed
 
-from params_monte_carlo import *
+from params_monte_carlo import (
+    coeff_subsets,
+    data_dir,
+    plots_dir,
+    basic_values,
+    headers_demand_betas,
+    headers_demand_sigmas,
+    headers_supply,
+    headers_varianceshares_demand,
+    headers_varianceshares_supply,
+    gamma_vals,
+    var_xi_vals,
+    var_omega_vals,
+    sigma2_vals,
+    headers_coeffs,
+    str_coeffs,
+)
 
 sns.set_context("paper")
 sns.set_style("whitegrid")
@@ -111,7 +127,7 @@ if __name__ == "__main__":
             for var_xi in var_xi_vals:
                 for sigma2 in sigma2_vals:
                     subcase = (sigma2, gamma_val, var_xi, var_omega)
-                    print(subcase)
+                    # print(subcase)
                     # plots for the mean coefficients of demand
                     true_vals = [basic_values[j] for j in headers_demand_betas]
                     plot_estimates(
